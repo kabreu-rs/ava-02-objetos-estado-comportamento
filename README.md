@@ -1,6 +1,6 @@
 # Avaliação 02 Objetos, Estado e Comportamento
 
-_Classroom link:_ <!-- TODO: -->
+_Classroom link:_ <https://classroom.github.com/a/FAILJADZ>
 
 ## Modelar e implementar respeitando os princípios básicos de Orientação a Objetos
 
