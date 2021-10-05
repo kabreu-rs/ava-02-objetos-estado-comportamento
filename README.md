@@ -281,12 +281,12 @@ f.profundidade = 540;
 
 // Novo Forno
 Forno forno = new Forno(84, 220, 1860, 61, 58, 58);
-System.out.println(forno.volume = 84);
-System.out.println(forno.tensao = 220);
-System.out.println(forno.potencia = 1860);
-System.out.println(forno.altura = 58);
-System.out.println(forno.largura = 61);
-System.out.println(forno.profundidade = 58);
+System.out.println(forno.volume == 84);
+System.out.println(forno.tensao == 220);
+System.out.println(forno.potencia == 1860);
+System.out.println(forno.altura == 58);
+System.out.println(forno.largura == 61);
+System.out.println(forno.profundidade == 58);
 
 // métodos para consulta
 System.out.println(forno.temperatura()); // 0 (de 50 a 300)
