@@ -233,8 +233,246 @@ public class App {
     System.out.println(maquinao.agua() == 200);
     System.out.println(maquinao.copos300() == 334);
     //System.out.println(maquinao.agua());
+
+
+    Forno f = new Forno(45, 220, 1700, 66, 40, 54);
+    System.out.println(f.volume == 45);
+    System.out.println(f.tensao == 220);
+    System.out.println(f.potencia == 1700);
+    System.out.println(f.largura == 66);
+    System.out.println(f.altura == 40);
+    System.out.println(f.profundidade == 54);
+    // todos esses atributos devem ser constantes, as atribuções a seguir não podem
+    // compilar,
+    // verifique se estão protegidas e então comente estas linhas:
+    f.volume = 450;
+    f.tensao = 2200;
+    f.potencia = 17000;
+    f.altura = 400;
+    f.largura = 660;
+    f.profundidade = 540;
+
+    // Novo Forno
+    Forno forno = new Forno(84, 220, 1860, 61, 58, 58);
+    System.out.println(forno.volume == 84);
+    System.out.println(forno.tensao == 220);
+    System.out.println(forno.potencia == 1860);
+    System.out.println(forno.altura == 58);
+    System.out.println(forno.largura == 61);
+    System.out.println(forno.profundidade == 58);
+
+    // métodos para consulta
+    System.out.println(forno.temperatura()); // 0 (de 50 a 300)
+    System.out.println(forno.ligado()); // false
+    // os atributos temperatura e ligado devem ser inacessíveis (privados)
+    // não deve compilar, verifique e depois comente as seguintes linhas
+    System.out.println(forno.temperatura);
+    System.out.println(forno.ligado);
+    //
+    System.out.println(forno.ligado() == false);
+    forno.aumentarTemperatura(); // liga e vai para 50
+    System.out.println(forno.ligado() == true);
+    System.out.println(forno.temperatura() == 50); // 50
+    forno.aumentarTemperatura();
+    System.out.println(forno.temperatura() == 100); // 100
+    forno.aumentarTemperatura();
+    System.out.println(forno.temperatura() == 150); // 150
+    forno.aumentarTemperatura();
+    System.out.println(forno.temperatura() == 200); // 200
+    forno.aumentarTemperatura();
+    System.out.println(forno.temperatura() == 220); // 220
+    forno.aumentarTemperatura();
+    System.out.println(forno.temperatura() == 250); // 250
+    forno.aumentarTemperatura();
+    System.out.println(forno.temperatura() == 300); // 300
+
+    forno.aumentarTemperatura(); // está no máximo
+    System.out.println(forno.temperatura() == 300); // 300
+    System.out.println(forno.ligado() == true);
+    // reduzindo
+    forno.diminuirTemperatura();
+    forno.diminuirTemperatura();
+    forno.diminuirTemperatura();
+    System.out.println(forno.temperatura() == 200); // 200
+    // desligando direto
+    forno.desligar();
+    System.out.println(forno.ligado() == false);
+    System.out.println(forno.temperatura() == 0);
+    // já está desligado
+    forno.diminuirTemperatura();
+    System.out.println(forno.ligado() == false);
+    System.out.println(forno.temperatura() == 0);
+
+    // timer de 1 a 120 minutos
+    forno.setTimer(15); // minutos
+    forno.aumentarTemperatura();
+    forno.aumentarTemperatura();
+    forno.aumentarTemperatura();
+    System.out.println(forno.ligado() == true);
+    System.out.println(forno.temperatura() == 150);
+    System.out.println(forno.tempoRestante() == 15);
+    forno.tick(); // tick do timer (baixa 1min)
+    System.out.println(forno.tempoRestante() == 14);
+    forno.tick();
+    forno.tick();
+    forno.tick();
+    forno.tick();
+    System.out.println(forno.ligado() == true);
+    System.out.println(forno.temperatura() == 150);
+    System.out.println(forno.tempoRestante() == 10);
+    // 10 ticks
+    forno.tick();
+    forno.tick();
+    forno.tick();
+    forno.tick();
+    forno.tick();
+    forno.tick();
+    forno.tick();
+    forno.tick();
+    forno.tick();
+    forno.tick();
+    System.out.println(forno.tempoRestante() == 0);
+    System.out.println(forno.temperatura() == 0);
+    System.out.println(forno.ligado() == false);
+    // novo timer
+    forno.setTimer(120);
+    forno.aumentarTemperatura();
+    forno.aumentarTemperatura();
+    System.out.println(forno.ligado() == true);
+    System.out.println(forno.temperatura() == 100);
+    System.out.println(forno.tempoRestante() == 120);
+
+    while (forno.ligado())
+      forno.tick(); // tic tac até desligar
+
+    System.out.println(forno.tempoRestante() == 0);
+    System.out.println(forno.ligado() == false);
+    System.out.println(forno.temperatura() == 0);
+
+    // titulo = "Os inovadores", paginas = 544
+    EBook osInovadores = new EBook("Os inovadores", 544);
+
+    System.out.println(osInovadores.titulo); // Os inovadores
+    System.out.println(osInovadores.titulo.equals("Os inovadores")); // true
+
+    // Essa linha não deve compilar (comente-a)
+    osInovadores.titulo = "Alterando o título";
+    // Páginas também é imutável
+    System.out.println(osInovadores.paginas); // 544
+    System.out.println(osInovadores.paginas == 544); // true
+
+    // Essa linha não deve compilar (comente-a)
+    osInovadores.paginas = 120;
+
+    // Página atual sendo lida sempre inicia com 1
+    System.out.println(osInovadores.lendoPagina == 1);
+
+    // Sequência de e-books inválidos,
+    // os construtores devem lançar uma IllegalArgumentException.
+    try {
+      EBook ebookInvalido = new EBook("", 544); // titulo vazio
+      System.out.println(false); // essa linha não deve ser alcançada
+    } catch (IllegalArgumentException e) { // a exceção deve ser capturada
+      System.out.println(true);
+    }
+
+    try {
+      EBook ebookInvalido = new EBook("Um titulo", 0); // sem páginas
+      System.out.println(false);
+    } catch (IllegalArgumentException e) {
+      System.out.println(true);
+    }
+
+    try {
+      EBook ebookInvalido = new EBook("Um titulo", -10); // páginas negativas
+      System.out.println(false);
+    } catch (IllegalArgumentException e) {
+      System.out.println(true);
+    }
+    try {
+      EBook ebookInvalido = new EBook("Um titulo", -10); // páginas negativas
+      System.out.println(false);
+    } catch (IllegalArgumentException e) {/
+      System.out.println(true);
+    }
+
+    try {
+      EBook ebookInvalido = new EBook("Um titulo", 6000); // páginas > 5000
+      System.out.println(false);
+    } catch (IllegalArgumentException e) {
+      System.out.println(true);
+    }
+    EBook aCatedralEOBazar = new EBook("A catedral e o bazar", 14);
+    // http://www.dominiopublico.gov.br/pesquisa/DetalheObraForm.do?select_action=&co_obra=8679
+
+    System.out.println(aCatedralEOBazar.titulo.equals("A catedral e o bazar"));
+    System.out.println(aCatedralEOBazar.paginas == 14);
+    System.out.println(aCatedralEOBazar.lendoPagina == 1);
+
+    EBook oComoventeGuiaDeRuby = new EBook("O (comovente) guia de Ruby do why", 121);
+    // http://why.carlosbrando.com/
+    // https://en.wikipedia.org/wiki/Why_the_lucky_stiff
+
+    System.out.println(oComoventeGuiaDeRuby.titulo.equals("O (comovente) guia de Ruby do why"));
+    System.out.println(oComoventeGuiaDeRuby.paginas == 121);
+    System.out.println(oComoventeGuiaDeRuby.lendoPagina == 1);
+
+    aCatedralEOBazar.virarPagina(); // lendoPagina + 1
+
+    System.out.println(aCatedralEOBazar.lendoPagina == 2);
+
+    for (int i = 0; i < 10; i++)
+      aCatedralEOBazar.virarPagina(); // 10 pag viradas
+
+    System.out.println(aCatedralEOBazar.lendoPagina == 12);
+
+    aCatedralEOBazar.voltarPagina();
+
+    System.out.println(aCatedralEOBazar.lendoPagina == 11);
+
+    for (int i = 0; i < 10; i++)
+      aCatedralEOBazar.voltarPagina(); // 10 pag atrás
+
+    System.out.println(aCatedralEOBazar.lendoPagina == 1);
+
+    // tentar voltar página antes do 1 deve ser proibido
+    // lançando IllegalStateException, descomente, verifique, comente outra vez
+
+    try {
+      aCatedralEOBazar.voltarPagina(); // deve lançar IllegalStateException
+      System.out.println(false);
+    } catch (IllegalStateException e) {
+      System.out.println(true);
+    }
+
+    System.out.println(aCatedralEOBazar.lendoPagina == 1);
+
+    aCatedralEOBazar.irParaPagina(14)
+
+    System.out.println(aCatedralEOBazar.lendoPagina == 14);
+
+    try {
+       aCatedralEOBazar.virarPagina(); // deve lançar IllegalStateException
+       System.out.println(false);
+    } catch (IllegalStateException e) {
+      System.out.println(true);
+    }
+
+    try {
+       aCatedralEOBazar.irParaPagina(15); // deve lançar IllegalArgumentException
+       System.out.println(false);
+    } catch (IllegalArgumentException e) {
+      System.out.println(true);
+    }
+
+    // Escreva mais 5 casos de teste com um novo livro à escolha:
+
   }
 
-
-
 }
+                                                                                                                                                // do
+                                                                                                                                                                                                                                        // timer
+                                                                                                                                                                                                                                        // (baixa
+                                                                                                                                                                                                                                        // 1min)
+
+
