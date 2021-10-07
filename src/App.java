@@ -232,7 +232,7 @@ public class App {
     }
     System.out.println(maquinao.agua() == 200);
     System.out.println(maquinao.copos300() == 334);
-    //System.out.println(maquinao.agua());
+    //System.out.println(maquinao.agua());*/
 
 
     Forno f = new Forno(45, 220, 1700, 66, 40, 54);
