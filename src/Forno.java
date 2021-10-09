@@ -8,7 +8,8 @@ public class Forno {
   int profundidade;
   boolean ligado = false;
   int temperatura;
-  int tempo;
+  int timer;
+  //int tick
 
   Forno(int volume, int tensao, int potencia, int largura, int altura, int profundidade) {
 
@@ -18,6 +19,7 @@ public class Forno {
     this.largura = largura;
     this.altura = altura;
     this.profundidade = profundidade;
+    //this.timer = timer;
   }
 
   int volume() {
@@ -76,11 +78,29 @@ public class Forno {
       ligado = false;
     }
   }
-  void TempoRestante(){
-    if (tempo <=1 && tempo >= 120) {
-      tempo = tempo - 1;
-
+  void setTimer(int tempo){
+    if (tempo == 0) {
+      this.ligado = false;
+      temperatura = 0;
     }
-  }
+    this.timer  = tempo;
+    temperatura = 0;
 
+  }
+  void tick(){
+    if (timer > 0) {
+      timer = timer -1;
+    }else{
+      this.ligado = false;
+      temperatura = 0;
+    }
+
+  }
+  int tempoRestante(){
+    return this.timer;
+  }
+  void desligar(){
+    this.ligado = false;
+    temperatura = 0;
+  }
 }
