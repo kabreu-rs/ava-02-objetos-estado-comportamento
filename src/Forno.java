@@ -79,7 +79,7 @@ public class Forno {
     }
   }
   void setTimer(int tempo){
-    if (tempo == 0) {
+    if (tempo == 0 && tempo <=120) {
       this.ligado = false;
       temperatura = 0;
     }
@@ -89,8 +89,12 @@ public class Forno {
   }
   void tick(){
     if (timer > 0) {
+      if (timer - 1 == 0) {
+        this.ligado = false;
+        temperatura = 0;
+      }
       timer = timer -1;
-    }else{
+    }else if(timer <=0){
       this.ligado = false;
       temperatura = 0;
     }
